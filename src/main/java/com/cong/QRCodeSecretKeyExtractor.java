@@ -10,13 +10,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QRCodeSecretKeyExtractor {
 
     public static void main(String[] args) {
         if (args.length != 1) {
-            System.err.println("使用方法: java -jar QRCodeSecretExtractor.jar <二维码图片路径>");
+            System.err.println(" QRCodeSecretExtractor qrCodeimage");
             System.exit(1);
         }
 
@@ -37,7 +38,7 @@ public class QRCodeSecretKeyExtractor {
             } else {
                 System.out.println("未能提取到 secret 密钥");
             }
-        } catch (IOException | NotFoundException | URISyntaxException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -46,7 +47,8 @@ public class QRCodeSecretKeyExtractor {
     private static String decodeQRCode(File qrCodeimage) throws IOException, NotFoundException {
         BufferedImage bufferedImage = ImageIO.read(qrCodeimage);
         if (bufferedImage == null) {
-            throw new IOException("无法读取二维码图片");
+            System.out.println("bufferedImage is null");
+            return null;
         }
         LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));

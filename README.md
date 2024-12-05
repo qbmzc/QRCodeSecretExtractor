@@ -1,9 +1,12 @@
+- [Mac：java.library.path 中没有 awt 的问题](https://github.com/oracle/graal/issues/4124)
+
 使用 **GraalVM** 将 Java 代码编译为本地可执行文件（native executable）可以显著提高启动速度和降低内存消耗。以下是将您提供的从二维码中提取 secret 密钥的 Java 代码使用 GraalVM 编译为可执行命令的详细步骤。
 
 ### 前提条件
 
 1. **安装 GraalVM**：
-    - 访问 [GraalVM 官方下载页面](https://www.graalvm.org/downloads/) 下载适用于您操作系统的 GraalVM 版本。
+    - ~~访问 [GraalVM 官方下载页面](https://www.graalvm.org/downloads/) 下载适用于您操作系统的 GraalVM 版本。~~
+    - [DownloadLiberica Native Image Kit](https://bell-sw.com/pages/downloads/native-image-kit/#nik-23-(jdk-21))
     - 解压缩并设置环境变量 `GRAALVM_HOME` 指向 GraalVM 安装目录。
     - 将 GraalVM 的 `bin` 目录添加到 `PATH` 环境变量中。
 
@@ -26,7 +29,7 @@
 如果您还没有项目，可以使用 Maven 创建一个新的项目：
 
 ```bash
-mvn archetype:generate -DgroupId=com.example -DartifactId=QRCodeSecretExtractor -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn archetype:generate -DgroupId=com.cong -DartifactId=QRCodeSecretExtractor -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 ```
 
 #### 2. 添加依赖
@@ -40,7 +43,7 @@ mvn archetype:generate -DgroupId=com.example -DartifactId=QRCodeSecretExtractor 
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
+    <groupId>com.cong</groupId>
     <artifactId>QRCodeSecretExtractor</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -226,7 +229,7 @@ export PATH=$JAVA_HOME/bin:$PATH
                     <configuration>
                         <transformers>
                             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>com.example.QRCodeSecretKeyExtractor</mainClass>
+                                <mainClass>com.cong.QRCodeSecretKeyExtractor</mainClass>
                             </transformer>
                         </transformers>
                     </configuration>
@@ -285,7 +288,7 @@ QRCodeSecretExtractor/
     └── main/
         └── java/
             └── com/
-                └── example/
+                └── cong/
                     └── QRCodeSecretKeyExtractor.java
 ```
 
@@ -298,13 +301,13 @@ QRCodeSecretExtractor/
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
+    <groupId>com.cong</groupId>
     <artifactId>QRCodeSecretExtractor</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -337,7 +340,7 @@ QRCodeSecretExtractor/
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.example.QRCodeSecretKeyExtractor</mainClass>
+                                    <mainClass>com.cong.QRCodeSecretKeyExtractor</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
